@@ -4,7 +4,7 @@ open Akka.FSharp.Spawn
 open Akka.Actor
 open WinTail
 
-let printInstructions() = 
+let printInstructions() =
     Console.WriteLine "Write whatever you want into the console!"
     Console.Write "Some lines will appear as"
     Console.ForegroundColor <- ConsoleColor.Red
@@ -19,10 +19,10 @@ let printInstructions() =
     Console.WriteLine "Type 'exit' to quit this application at any time.\n"
 
 [<EntryPoint>]
-let main _ = 
+let main _ =
     // initialize an actor system
     // YOU NEED TO FILL IN HERE
-    let myActorSystem = 
+    let myActorSystem =
         System.create "MyActorSystem" (Configuration.parse "akka.suppress-json-serializer-warning = on")
 
     printInstructions()
@@ -30,7 +30,7 @@ let main _ =
     // make your first actors using the 'spawn' function
     // YOU NEED TO FILL IN HERE
     let consoleWriterActor = spawn myActorSystem "consoleWriterActor" <| actorOf (Actors.consoleWriterActor)
-    let consoleReaderActor = 
+    let consoleReaderActor =
         spawn myActorSystem "consoleReaderActor" <| actorOf2 (Actors.consoleReaderActor consoleWriterActor)
 
     // tell the consoleReader actor to begin
